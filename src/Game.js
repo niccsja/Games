@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+
 /**
- * Challenge: Using hooks, track the state of the text in the textarea on every keystroke
- * To verify it's working, you could just console.log the state on every change
+ * Challenge:
+ *
+ * When the timer reaches 0, count the number of words the user typed in
+ * and display it in the "Word count" section
+ *
+ * After the game ends, make it so the user can click the Start button again
+ * to play a second time
  */
 
 function App() {
@@ -16,7 +22,7 @@ function App() {
     setText(value);
   }
 
-  function calculateWords(text) {
+  function calculateWordCount(text) {
     const wordsArr = text.trim().split(" ");
     return wordsArr.filter((word) => word !== "").length;
   }
@@ -24,12 +30,12 @@ function App() {
   function startGame() {
     setIsTimeRunning(true);
     setTimeRemaining(5);
-    setText("")
+    setText("");
   }
 
   function endGame() {
     setIsTimeRunning(false);
-    setWordCount(calculateWords(text));
+    setWordCount(calculateWordCount(text));
   }
 
   useEffect(() => {
@@ -46,7 +52,7 @@ function App() {
     <div>
       <h1>How fast do you type?</h1>
       <textarea onChange={handleChange} value={text} />
-      <h4>Time reminaing: {timeRemaining}</h4>
+      <h4>Time remaining: {timeRemaining}</h4>
       <button onClick={startGame}>Start</button>
       <h1>Word count: {wordCount}</h1>
     </div>
